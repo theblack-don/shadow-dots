@@ -61,7 +61,7 @@ main() {
     # 3. Initialize dcli config if needed
     if [[ ! -d "${HOME}/.config/arch-config" ]]; then
         yellow "Initializing DCLI config..."
-        dcli init -b
+        dcli init
     else
         green "DCLI config already initialized"
     fi

@@ -1,0 +1,20 @@
+# Alacritty - Minimal config for Noctalia/DMS theming
+# Font and basic behavior only; colors come from the system theme.
+
+[font]
+normal = { family = "JetBrains Mono", style = "Regular" }
+size = 11.0
+
+[window]
+padding = { x = 4, y = 4 }
+dynamic_padding = true
+opacity = 1.0
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+
+[mouse]
+hide_when_typing = true
+
+# Colors are intentionally omitted so Noctalia/DMS can theme dynamically.
+# If you want a fallback, add a colors section here.

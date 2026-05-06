@@ -5,7 +5,7 @@ A minimal, reproducible Hyprland desktop environment for CachyOS/Arch Linux usin
 ## Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/shadow-dots.git
+git clone https://github.com/theblack-don/shadow-dots.git
 cd shadow-dots
 ./install.sh
 ```

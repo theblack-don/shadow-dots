@@ -1,0 +1,28 @@
+# Hyprland + DMS/Noctalia desktop environment for CachyOS/Arch
+
+packages:
+  # Core compositor
+  - hyprland
+
+  # Desktop portal
+  - xdg-desktop-portal-hyprland
+
+  # Terminals
+  - kitty
+  - alacritty
+
+  # Editors
+  - helix
+  - zed
+
+  # Desktop shells
+  - dms-shell-git
+  - noctalia-shell-git
+
+  # Switcher deps
+  - fzf
+  - jq
+
+  # Qt theme integration for Noctalia/DMS
+  - qt6ct
+  - qt5ct

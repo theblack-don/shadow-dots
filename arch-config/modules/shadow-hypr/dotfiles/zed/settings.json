@@ -1,0 +1,22 @@
+{
+  // Zed - Minimal settings for Noctalia/DMS theming
+  // UI and editor behavior only; theme is set at runtime.
+
+  "theme": "Zed Themes: One Dark",
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 14,
+  "ui_font_size": 14,
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "tab_size": 2,
+  "hard_tabs": false,
+  "ensure_final_newline_on_save": true,
+  "format_on_save": "on",
+  "show_whitespaces": "selection",
+  "scrollbar": {
+    "show": "auto"
+  },
+  "indent_guides": {
+    "enabled": true
+  }
+}

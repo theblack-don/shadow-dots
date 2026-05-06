@@ -1,0 +1,9 @@
+description: "Shadow Hyprland - DMS & Noctalia with minimal dotfiles"
+
+# Auto-sync dotfiles/ directories to ~/.config/
+dotfiles_sync: true
+
+# Post-install hook for shell-switcher setup
+post_install_hook: "scripts/setup.sh"
+hook_behavior: once
+run_hooks_as_user: true

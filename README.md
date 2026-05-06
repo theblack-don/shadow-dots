@@ -1,6 +1,6 @@
 # Shadow Dots
 
-A minimal, reproducible Hyprland desktop environment for CachyOS/Arch Linux using [DCLI](https://gitlab.com/theblackdon/dcli) and bundled with the [Shell Switcher](https://gitlab.com/theblackdon/shell-switch) for toggling between **Dank Material Shell (DMS)** and **Noctalia Shell**.
+A minimal Hyprland desktop environment for CachyOS/Arch Linux using [DCLI](https://gitlab.com/theblackdon/dcli) and bundled with the [Shell Switcher](https://gitlab.com/theblackdon/shell-switch) for toggling between **Dank Material Shell (DMS)** and **Noctalia Shell**.
 
 ## Install
 
@@ -12,7 +12,7 @@ cd shadow-dots
 
 The installer will:
 1. Install `dcli` from the AUR if it is missing
-2. Copy the full `arch-config` into `~/.config/`
+2. Copy the full `dcli-config` into `~/.config/`
 3. Validate the config with `dcli validate`
 
 Then run `dcli sync` to install packages and apply dotfiles.

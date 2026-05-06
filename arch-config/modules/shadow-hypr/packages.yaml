@@ -6,6 +6,7 @@ packages:
 
   # Desktop portal
   - xdg-desktop-portal-hyprland
+  - xorg-xwayland
 
   # Terminals
   - kitty

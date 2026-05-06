@@ -1,0 +1,12 @@
+host: shadow
+description: Shadow Hyprland Desktop
+
+enabled_modules:
+  - shadow-hypr
+
+# Host-specific packages (add extras here)
+packages: []
+
+# Settings
+aur_helper: paru
+module_processing: parallel

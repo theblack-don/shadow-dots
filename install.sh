@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # install.sh - Shadow Dots Installer for CachyOS/Arch
-# Installs DCLI, copies the shadow-hypr module, and runs initial sync
+# Installs DCLI, copies the full arch-config, and runs initial sync
 
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MODULE_SRC="${REPO_DIR}/arch-config/modules/shadow-hypr"
-MODULE_DEST="${HOME}/.config/arch-config/modules/shadow-hypr"
+CONFIG_SRC="${REPO_DIR}/arch-config"
+CONFIG_DEST="${HOME}/.config/arch-config"
 
 #######################################
 # Colors
@@ -26,6 +26,19 @@ detect_aur_helper() {
         echo "yay"
     else
         echo ""
+    fi
+}
+
+#######################################
+# Backup existing DCLI config
+#######################################
+backup_existing_config() {
+    if [[ -d "$CONFIG_DEST" ]]; then
+        local timestamp
+        timestamp=$(date '+%Y%m%d_%H%M%S')
+        local backup_path="${CONFIG_DEST}.backup.${timestamp}"
+        yellow "Existing DCLI config found. Backing up to ${backup_path}..."
+        mv "$CONFIG_DEST" "$backup_path"
     fi
 }
 
@@ -58,40 +71,41 @@ main() {
         green "dcli is already installed"
     fi
 
-    # 3. Initialize dcli config if needed
-    if [[ ! -d "${HOME}/.config/arch-config" ]]; then
-        yellow "Initializing DCLI config..."
-        dcli init
-    else
-        green "DCLI config already initialized"
+    # 3. Backup and copy full DCLI config
+    backup_existing_config
+    cyan "Copying DCLI config..."
+    cp -r "$CONFIG_SRC" "$CONFIG_DEST"
+    green "Config copied to ${CONFIG_DEST}"
+
+    # 4. Update host name to match current hostname
+    local hostname
+    hostname=$(hostname)
+    if [[ "$hostname" != "shadow" ]]; then
+        yellow "Updating active host to match system hostname: ${hostname}..."
+        sed -i "s/^active_host: shadow/active_host: ${hostname}/" "${CONFIG_DEST}/config.yaml"
+        if [[ -f "${CONFIG_DEST}/hosts/shadow.yaml" ]]; then
+            sed -i "s/^host: shadow/host: ${hostname}/" "${CONFIG_DEST}/hosts/shadow.yaml"
+            mv "${CONFIG_DEST}/hosts/shadow.yaml" "${CONFIG_DEST}/hosts/${hostname}.yaml"
+        fi
+        green "Host updated to: ${hostname}"
     fi
 
-    # 4. Copy module
-    cyan "Copying shadow-hypr module..."
-    rm -rf "$MODULE_DEST"
-    mkdir -p "$(dirname "$MODULE_DEST")"
-    cp -r "$MODULE_SRC" "$MODULE_DEST"
-    green "Module copied to ${MODULE_DEST}"
-
-    # 5. Enable module
-    cyan "Enabling shadow-hypr module..."
-    dcli module enable shadow-hypr
-
-    # 6. Sync
+    # 5. Validate config
     echo ""
-    cyan "Running dcli sync (this may take a while)..."
-    dcli sync
+    cyan "Validating DCLI config..."
+    dcli validate
 
     echo ""
     green "╔═══════════════════════════════════════════════╗"
-    green "║     Installation Complete!                    ║"
+    green "║     Setup Complete!                           ║"
     green "╚═══════════════════════════════════════════════╝"
     echo ""
     echo "Next steps:"
-    echo "  1. Log out and select Hyprland from your display manager."
-    echo "  2. Noctalia Shell will start automatically."
-    echo "  3. Press Super+Space to open the launcher."
-    echo "  4. Run 'shell-switch' in a terminal to switch to DMS."
+    echo "  1. Run 'dcli sync' to install packages and apply dotfiles."
+    echo "  2. Log out and select Hyprland from your display manager."
+    echo "  3. Noctalia Shell will start automatically."
+    echo "  4. Press Super+Space to open the launcher."
+    echo "  5. Run 'shell-switch' in a terminal to switch to DMS."
     echo ""
 }
 

@@ -12,8 +12,10 @@ cd shadow-dots
 
 The installer will:
 1. Install `dcli` from the AUR if it is missing
-2. Copy the `shadow-hypr` DCLI module into your config
-3. Enable the module and run `dcli sync`
+2. Copy the full `arch-config` into `~/.config/`
+3. Validate the config with `dcli validate`
 
-After installation, log out and select Hyprland. Noctalia starts by default. Press **Super+Space** for the launcher, or run `shell-switch` to toggle between DMS and Noctalia.
+Then run `dcli sync` to install packages and apply dotfiles.
+
+After syncing, log out and select Hyprland. Noctalia starts by default. Press **Super+Space** for the launcher, or run `shell-switch` to toggle between DMS and Noctalia.
 # shadow-dots
